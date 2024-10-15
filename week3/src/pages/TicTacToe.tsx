@@ -1,5 +1,5 @@
 import {Col, Container, Row} from "react-bootstrap";
-import Square from "../components/Square";
+import Board from "../components/Board";
 
 
 export default function TicTacToe() {
@@ -13,7 +13,7 @@ export default function TicTacToe() {
             </Row>
             <Row>
                 <Col>
-                    <Square />
+                    <Board />
                 </Col>
             </Row>
         </Container>
