@@ -1,4 +1,5 @@
 import Square from "./Square";
+import {Alert} from "react-bootstrap";
 
 interface BoardProps {
     xIsNext: boolean ,
@@ -52,6 +53,11 @@ export default function Board({ xIsNext, squares, onPlay }:BoardProps) {
 
     return (
         <>
+            <div className="board-row d-flex justify-content-center align-items-center">
+                <Alert variant={xIsNext ? 'primary' : 'warning'}>
+                    {status}
+                </Alert>
+            </div>
             <div className="board-row">
                 <Square value={squares[0]} onSquareClick={() => handleClick(0)}/>
                 <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>

@@ -3,34 +3,85 @@
 }
 
 .square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
+    background-color: #ffffff; /* Keep the squares white for contrast */
+    border: 2px solid #343a40;
+    font-size: 36px;
     font-weight: bold;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
+    height: 100px;
+    width: 100px;
     text-align: center;
-    width: 34px;
+    line-height: 100px; /* Vertically center text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.board-row:after {
-    clear: both;
-    content: '';
-    display: table;
+.square:hover {
+    background-color: #adb5bd; /* Slight hover effect */
+}
+
+.board-row {
+    display: flex;
 }
 
 .status {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
+
 .game {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #e0e0e0; /* Soft neutral background */
 }
 
 .game-info {
-    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    width: 100%; /* Full width of the game container */
+}
+
+ol {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+ol li {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ffffff; /* White background for better contrast */
+    color: #495057; /* Darker gray for text */
+    border: 1px solid #cccccc; /* Light gray border to outline the button */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight shadow for button depth */
+}
+
+button:hover {
+    background-color: #f1f3f5; /* Slightly darker white on hover */
+    transform: translateY(-2px); /* Small lift effect */
+}
+
+button:focus {
+    outline: none;
+}
+
+ol li:last-child button {
+    background-color: #ffc107; /* Highlight the latest move (yellow) */
+    color: #212529;
 }
