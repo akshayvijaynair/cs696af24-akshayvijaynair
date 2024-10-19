@@ -1,12 +1,12 @@
 import React from 'react';
-import logo from './logo.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Nav, Navbar, NavDropdown, Container} from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import NavBar from "./components/NavBar";
 import {Route, Routes} from "react-router-dom";
 import Link from "./pages/Link";
 import Counter from "./pages/Counter";
+import TicTacToe from "./pages/TicTacToe";
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
                     <Route path="/"  element={<p>Welcome To React</p>} />
                     <Route path="/link"  element={<Link />} />
                     <Route path="/counter"  element={<Counter />} />
+                    <Route path="/tictactoe"  element={<TicTacToe />} />
                 </Routes>
             </Container>
         </div>
