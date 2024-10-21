@@ -1,41 +1,27 @@
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Button, Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import React from "react";
-import {Link} from "react-router-dom";
 
 export default function NavBar (){
 return(
-    <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link>
-                        <Link to={"/"}>Home</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to={"/link"}>Link</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to={"/counter"}>Counter</Link>
-                    </Nav.Link>
-                    <Nav.Link>
-                        <Link to={"/tictactoe"}>TicTacToe</Link>
-                    </Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">
-                            Another action
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider/>
-                        <NavDropdown.Item href="#action/3.4">
-                            Separated link
-                        </NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-            </Navbar.Collapse>
-        </Container>
+    <Navbar bg="light" expand="lg" className="mb-4">
+        <Navbar.Brand href="/" className="m-2"><h3>Dashboard</h3></Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-center">
+            <Form className="d-flex">
+                <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search"/>
+                <Button variant="outline-success">Search</Button>
+            </Form>
+            <Nav>
+                <Nav.Link href="#notifications">Notifications</Nav.Link>
+                <Nav.Link href="#profile">User Profile</Nav.Link>
+                <NavDropdown title="Others" id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/link">Link</NavDropdown.Item>
+                    <NavDropdown.Item href="/counter">Counter</NavDropdown.Item>
+                    <NavDropdown.Divider/>
+                    <NavDropdown.Item href="/tictactoe">TicTacTow</NavDropdown.Item>
+                </NavDropdown>
+            </Nav>
+        </Navbar.Collapse>
     </Navbar>
 )
 }
