@@ -6,6 +6,35 @@ const resolvers = {
             let query = { restaurant_id: restaurant_id };
             return await collection.findOne(query);
         },
+        async restaurants(_, { borough, cuisine }) {
+            let collection = await db.collection("restaurants");
+            let query = { borough: borough, cuisine: cuisine };
+            const capitalizeFirstLetter = (string) => {
+                if (!string) return '';
+                return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+            };
+
+            if (!borough || !cuisine) {
+                throw new Error('Bad Request. Missing Parameters' );
+            }
+
+            const results = await collection.find(query).toArray();
+
+            if (results.length >0) {
+                return results;
+            } else {
+                query = {
+                    borough: capitalizeFirstLetter(borough),
+                    cuisine: capitalizeFirstLetter(cuisine)
+                };
+                const recheck = await collection.find(query).toArray();
+                if (recheck.length === 0) {
+                    throw new Error('Nothing found' );
+                } else {
+                    return recheck;
+                }
+            }
+        },
     },
     Mutation: {
         async createRestaurant(_, { restaurant_id, name, borough, cuisine }, context) {
