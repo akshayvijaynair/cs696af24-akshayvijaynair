@@ -14,6 +14,42 @@ app.get('/restaurants/:id', function(req, res) {
         .catch((reason) => res.status(500).send(`Not Found ${reason}`));
 });
 
+app.get('/restaurants', function (req, res) {
+    const { borough, cuisine } = req.query;
+    const capitalizeFirstLetter = (string) => {
+        if (!string) return '';
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    };
+
+    if (!borough || !cuisine) {
+        return res.status(400).json({ error: 'Bad Request. Missing Parameters' });
+    }
+
+    db.collection('restaurants')
+        .find({ borough: borough, cuisine: cuisine })
+        .toArray()
+        .then(restaurants => {
+            if (restaurants.length > 0) {
+                return res.json(restaurants);
+            }
+
+            db.collection('restaurants')
+                .find({
+                    borough: capitalizeFirstLetter(borough),
+                    cuisine: capitalizeFirstLetter(cuisine) })
+                .toArray()
+                .then(capitalizedRestaurants => {
+                    if (capitalizedRestaurants.length > 0) {
+                        return res.json(capitalizedRestaurants);
+                    }
+
+                    return res.status(404).json({ error: 'No restaurants found for the specified borough and cuisine.' });
+                })
+                .catch(error => res.status(500).json({ error: `An error occurred during capitalization query: ${error.message}` }));
+        })
+        .catch(error => res.status(500).json({ error: `An error occurred: ${error.message}` }));
+});
+
 app.get('/restaurants/:id', function(req, res) {
     const restaurant_id = req.params["id"];
     db.collection("restaurants").findOne({
