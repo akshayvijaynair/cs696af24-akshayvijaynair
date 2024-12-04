@@ -2,7 +2,7 @@
   "name": "restaurants_rest",
   "version": "1.0.0",
   "description": "rest api to pull outlet data",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node server.js",
