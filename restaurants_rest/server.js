@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import db from "./db/connection.js";
 import redisClient from "./db/redis.js";
+import messageQueue from "./db/bull.js";
 const PORT = process.env.PORT || 8000;
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 app.get('/restaurants/:id', async function(req, res) {
     const restaurant_id = req.params["id"];
     const value = await redisClient.get(restaurant_id);
@@ -24,6 +26,15 @@ app.get('/restaurants/:id', async function(req, res) {
     }
 });
 
+app.put('/restaurants/:id', async function(req, res) {
+    const restaurant_id = req.params["id"];
+    const updates = req.body["updates"];
+    messageQueue.add({
+        restaurant_id: restaurant_id,
+        updates: JSON.stringify(updates)
+    });
+    res.send("Message Queued");
+});
 
 app.get('/restaurants', function (req, res) {
     const { borough, cuisine } = req.query;
